@@ -1,3 +1,3 @@
-public class Aapning {
-    
+public class Aapning extends HvitRute {
+
 }
