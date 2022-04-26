@@ -4,4 +4,10 @@ public class Aapning extends HvitRute {
         super(rad, kolonne, lab);
     }
 
+    @Override
+    public String toString() {
+        String print = "Aapning at: (" + kolonne + ", " + rad + ")";
+        return print;
+    }
+
 }

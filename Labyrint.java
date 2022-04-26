@@ -17,12 +17,12 @@ public class Labyrint {
                 if (antallLinjer == 0) {
                     String[] fordeleRogK = nextLine.split(" ");
                     try {
-                        rad = Integer.parseInt(fordeleRogK[0]);
+                        kolonne = Integer.parseInt(fordeleRogK[0]);
                     } catch (Exception e) {
                         System.out.println("Rad fakka opp");
                     }
                     try {
-                        kolonne = Integer.parseInt(fordeleRogK[1]);
+                        rad = Integer.parseInt(fordeleRogK[1]);
                     } catch (Exception e) {
                         System.out.println("kolonne fakka opp");
                     }
