@@ -63,6 +63,14 @@ public class Labyrint {
         }
     }
 
+    public int hentKolonne() {
+        return kolonne;
+    }
+
+    public int hentRad() {
+        return rad;
+    }
+
     public Rute hentRute(int kolonne, int rad) { // kolonne = x, rad = y
         // kan godt hende denne fakker opp
         try {

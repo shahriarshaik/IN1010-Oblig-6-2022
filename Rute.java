@@ -21,10 +21,10 @@ public class Rute {
 
     Labyrint refLab; // TODO: dette er referanse labyrinten den er del av.
 
-    Rute nord = null; // TODO
-    Rute syd = null; // TODO
-    Rute vest = null; // TODO
-    Rute oest = null; // TODO
+    Rute nord = null;
+    Rute syd = null;
+    Rute vest = null;
+    Rute oest = null;
 
     public String hentNaboer() {
         String SNord = "tom";
@@ -66,14 +66,14 @@ public class Rute {
         }
     }
 
-    public void naboOstRegresjon(int rad, int kolonne) {
-        Rute start;
-        try {
-            start = lab.hentRute(kolonne, rad);
-        } catch (Exception e) {
-            System.out.println("finnes ingen rute i (" + kolonne + ", " + rad + ")");
-        }
-
+    public Rute naboOstRegresjon(Rute rute) { // første rute = [0][0]
+        Rute last = rute;
+        if (rute.lab.hentKolonne() == rute.kolonne) {
+            return rute;
+        } else {
+            last.oest = rute.naboOstRegresjon(lab.hentRute(kolonne + 1, rad));
+            return last;
+        } // TODO gjør denne ferdig
     }
 
     @Override
