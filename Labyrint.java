@@ -1,7 +1,4 @@
 import java.util.Scanner;
-
-import javax.lang.model.util.ElementScanner14;
-
 import java.io.File;
 
 public class Labyrint {
@@ -34,18 +31,29 @@ public class Labyrint {
                 } else {
                     char[] skilleRuter = nextLine.toCharArray();
                     System.out.println("\n" + nextLine + ": ");
-                    char hashtag = '#';
                     int tempKolonne = 1;
                     for (char c : skilleRuter) {
                         if (c == '#') {
                             System.out.print("# at (" + tempKolonne + "," + antallLinjer + "), ");
+                            try {
+                                settInnRute(tempKolonne, antallLinjer, '#');
+                            } catch (Exception e) {
+                                System.out.println("klarte ikke å lage en svart rute at(" + tempKolonne + ","
+                                        + antallLinjer + "), ");
+                            }
                         } else if (c == '.') {
                             System.out.print(". at (" + tempKolonne + "," + antallLinjer + "), ");
+                            try {
+                                settInnRute(tempKolonne, antallLinjer, '.');
+
+                            } catch (Exception e) {
+                                System.out.println("klarte ikke å lage en hvit rute at(" + tempKolonne + ","
+                                        + antallLinjer + "), ");
+                            }
                         }
                         tempKolonne++;
                     }
                 }
-                // rad = antallLinjer;
                 antallLinjer++;
             }
             System.out.println("\nantall rader: " + rad + "\nantall kolonner: " + kolonne);
@@ -53,7 +61,25 @@ public class Labyrint {
         } catch (Exception e) {
             System.out.println(e);
         }
+    }
 
+    public Rute hentRute(int kolonne, int rad) { // kolonne = x, rad = y
+        // kan godt hende denne fakker opp
+        try {
+            Rute retur = ruter[rad - 1][kolonne - 1];
+            return retur;
+        } catch (Exception e) {
+            // System.out.println("kunne ikke hent grunn av: \n" + e);
+            return null;
+        }
+    }
+
+    public void settInnRute(int rad, int kolonne, char rute) {
+        if (rute == '#') {
+            ruter[rad - 1][kolonne - 1] = new SortRute(rad, kolonne, this);
+        } else if (rute == '.') {
+            ruter[rad - 1][kolonne - 1] = new HvitRute(rad, kolonne, this);
+        }
     }
 
     @Override

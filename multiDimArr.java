@@ -4,7 +4,7 @@ public class multiDimArr {
 
     public static void main(String[] args) {
         String[][] test = new String[2][2];
-        String[] enDimTest = new String[2];
+        // String[] enDimTest = new String[2];
         /*
          * enDimTest[0] = "lol";
          * System.out.println(enDimTest[0]);
