@@ -19,14 +19,12 @@ public class Rute {
         this.lab = lab;
     }
 
-    Labyrint refLab; // TODO: dette er referanse labyrinten den er del av.
-
     Rute nord = null;
     Rute syd = null;
     Rute vest = null;
     Rute oest = null;
 
-    public String hentNaboer() {
+    public String settAutoNaboer() {
         String SNord = "tom";
         String SVest = "tom";
         String SOst = "tom";
@@ -55,6 +53,34 @@ public class Rute {
         return print;
     }
 
+    public String hentNaboer() {
+        String SNord = "tom";
+        String SVest = "tom";
+        String SOst = "tom";
+        String SSor = "tom";
+        try {
+            SNord = hentRute(rad, kolonne).nord.toString();
+        } catch (Exception e) {
+        }
+        try {
+            SVest = hentRute(rad, kolonne).vest.toString();
+        } catch (Exception e) {
+        }
+        try {
+            SOst = hentRute(rad, kolonne).oest.toString();
+        } catch (Exception e) {
+        }
+        try {
+            SSor = hentRute(rad, kolonne).syd.toString();
+        } catch (Exception e) {
+        }
+
+        String print = "                             nord:" + SNord + "\n"
+                + "vest: " + SVest + "   " + hentRute(rad, kolonne).toString() + "         øst: " + SOst
+                + "\n" + "                             sør:" + SSor;
+        return print;
+    }
+
     public Rute hentRute(int rad, int kolonne) {
         // kan godt hende denne fakker opp
         try {
@@ -64,16 +90,6 @@ public class Rute {
             // System.out.println("kunne ikke hent grunn av: \n" + e);
             return null;
         }
-    }
-
-    public Rute naboOstRegresjon(Rute rute) { // første rute = [0][0]
-        Rute last = rute;
-        if (rute.lab.hentKolonne() == rute.kolonne) {
-            return rute;
-        } else {
-            last.oest = rute.naboOstRegresjon(lab.hentRute(kolonne + 1, rad));
-            return last;
-        } // TODO gjør denne ferdig
     }
 
     @Override

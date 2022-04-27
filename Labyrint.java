@@ -2,7 +2,7 @@ import java.util.Scanner;
 import java.io.File;
 
 public class Labyrint {
-    Rute[][] ruter;
+    Rute[][] ruter; // [rad = y] [kolonne = x]
     // den skal ta vare på antall rader og antall kolonner
     private int rad = 0; // vertikale
     private int kolonne = 0; // horisontale
@@ -82,6 +82,39 @@ public class Labyrint {
         }
     }
 
+    public Rute naboOstRegresjon(Rute rute) { // første rute = [0][0]
+        Rute last = rute;
+        if (hentKolonne() == rute.kolonne) {
+            return rute;
+        } else {
+            Rute sendeInn = hentRute(last.kolonne + 1, last.rad);
+            // System.out.println(sendeInn);
+            last.oest = naboOstRegresjon(sendeInn);
+            return last;
+        }
+    }
+
+    public Rute naboSorRegresjon(Rute rute) {
+        Rute last = rute;
+        if (hentRad() == rute.rad) {
+            return rute;
+        } else {
+            Rute sendeInn = hentRute(last.kolonne, last.rad + 1);
+            // System.out.println(sendeInn);
+            last.syd = naboSorRegresjon(sendeInn);
+            return last;
+        }
+    }
+
+    public void giAlleNabo() { // TODO test denne
+        for (int i = 0; i < hentKolonne(); i++) {
+            naboSorRegresjon(ruter[0][i]);
+        }
+        for (int i = 0; i < hentRad(); i++) {
+            naboOstRegresjon(ruter[i][0]);
+        }
+    }
+
     public void settInnRute(int rad, int kolonne, char rute) {
         if (rute == '#') {
             ruter[rad - 1][kolonne - 1] = new SortRute(rad, kolonne, this);
@@ -92,7 +125,8 @@ public class Labyrint {
 
     @Override
     public String toString() {
-        // TODO fiks denne toStingen etterhvert
+        // TODO fiks denne toStingen etterhvert, fortsatt nulll anelse av hva som skal
+        // printes ut her
         return super.toString();
     }
 }
