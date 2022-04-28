@@ -3,7 +3,10 @@ public class SortRute extends Rute {
         super(y, x, lab);
     }
 
-    public char karakter= '#';
+    public String karakter= "■";
+    public String hentChar() {
+        return karakter;
+    }
 
     @Override
     public String toString() {

@@ -65,6 +65,7 @@ public class Labyrint {
         } catch (Exception e) {
             System.out.println(e);
         }
+        System.out.println(this);
     }
     public int hentKolonne() {
         return x;
@@ -84,7 +85,10 @@ public class Labyrint {
     }
     public Rute naboOstRegresjon(Rute rute) { // første rute = [0][0]
         Rute last = rute;
+        Rute Siste; 
         if (hentKolonne() == rute.x) {
+            Siste = rute; //ny kode
+            naboVestRegresjon(Siste); // ny kode
             return rute;
         } else {
             Rute sendeInn = hentRute(last.x + 1, last.y);
@@ -93,9 +97,23 @@ public class Labyrint {
             return last;
         }
     }
+    public Rute naboVestRegresjon(Rute rute) { 
+        Rute last = rute;
+        if (1 == rute.x) {
+            return rute;
+        } else {
+            Rute sendeInn = hentRute(last.x - 1, last.y);
+            // System.out.println(sendeInn);
+            last.vest = naboVestRegresjon(sendeInn);
+            return last;
+        }
+    }
     public Rute naboSorRegresjon(Rute rute) {
         Rute last = rute;
+        Rute Siste;
         if (hentRad() == rute.y) {
+            Siste = rute;
+            naboNordRegresjon(Siste);
             return rute;
         } else {
             Rute sendeInn = hentRute(last.x, last.y + 1);
@@ -104,8 +122,18 @@ public class Labyrint {
             return last;
         }
     }
-
-    public void giAlleNabo() { // TODO test denne
+    public Rute naboNordRegresjon(Rute rute) {
+        Rute last = rute;
+        if (1 == rute.y) {
+            return rute;
+        } else {
+            Rute sendeInn = hentRute(last.x, last.y - 1);
+            // System.out.println(sendeInn);
+            last.nord = naboNordRegresjon(sendeInn);
+            return last;
+        }
+    }
+    public void giAlleNabo() { 
         for (int i = 0; i < hentKolonne(); i++) {
             naboSorRegresjon(ruter[0][i]);
         }
@@ -113,19 +141,28 @@ public class Labyrint {
             naboOstRegresjon(ruter[i][0]);
         }
     }
-
     public void settInnRute(int y, int x, char rute) {
         if (rute == '#') {
             ruter[y - 1][x - 1] = new SortRute(y, x, this);
         } else if (rute == '.') {
-            ruter[y - 1][x - 1] = new HvitRute(y, x, this);
+            if(y == 1 || x == 1){
+                ruter[y - 1][x - 1] = new Aapning(y, x, this);
+                System.out.println("åpning rute i (" + x + ", " + y + ")");
+            } else{
+                ruter[y - 1][x - 1] = new HvitRute(y, x, this);
+            }
         }
     }
 
     @Override
     public String toString() {
-        // TODO fiks denne toStingen etterhvert, fortsatt nulll anelse av hva som skal
-        // printes ut her
-        return super.toString();
+        String print = "";
+        for (int x = 0; x < hentRad(); x++) {
+            for (int i = 0; i < hentKolonne(); i++) {
+                print = print + ruter[x][i].hentChar();
+            }
+            print = print + "\n";
+        }
+        return print;
     }
 }

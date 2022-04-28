@@ -24,6 +24,12 @@ public class Rute {
     Rute vest = null;
     Rute oest = null;
 
+    public String karakter;
+
+    public String hentChar() {
+        return karakter;
+    }
+
     public String settAutoNaboer() {
         String SNord = "tom";
         String SVest = "tom";

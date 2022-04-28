@@ -3,8 +3,10 @@ public class HvitRute extends Rute {
         super(rad, kolonne, lab);
     }
     
-    public char karakter= '.';
-
+    public String karakter= " ";
+    public String hentChar() {
+        return karakter;
+    }
 
     @Override
     public String toString() {
