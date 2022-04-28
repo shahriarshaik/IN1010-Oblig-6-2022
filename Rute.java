@@ -9,13 +9,13 @@ public class Rute {
      * Rute, kun av subklassene
      */
 
-    int rad;
-    int kolonne;
+    int y;
+    int x;
     Labyrint lab;
 
-    public Rute(int rad, int kolonne, Labyrint lab) {
-        this.rad = rad;
-        this.kolonne = kolonne;
+    public Rute(int y, int x, Labyrint lab) {
+        this.y = y;
+        this.x = x;
         this.lab = lab;
     }
 
@@ -31,24 +31,24 @@ public class Rute {
         String SSor = "tom";
 
         try {
-            SNord = hentRute(rad - 1, kolonne).toString();
+            SNord = hentRute(y - 1, x).toString();
         } catch (Exception e) {
         }
         try {
-            SVest = hentRute(rad, kolonne - 1).toString();
+            SVest = hentRute(y, x - 1).toString();
         } catch (Exception e) {
         }
         try {
-            SOst = hentRute(rad, kolonne + 1).toString();
+            SOst = hentRute(y, x + 1).toString();
         } catch (Exception e) {
         }
         try {
-            SSor = hentRute(rad + 1, kolonne).toString();
+            SSor = hentRute(y + 1, x).toString();
         } catch (Exception e) {
         }
 
         String print = "                             nord:" + SNord + "\n"
-                + "vest: " + SVest + "   " + hentRute(rad, kolonne).toString() + "         øst: " + SOst
+                + "vest: " + SVest + "   " + hentRute(y, x).toString() + "         øst: " + SOst
                 + "\n" + "                             sør:" + SSor;
         return print;
     }
@@ -59,32 +59,32 @@ public class Rute {
         String SOst = "tom";
         String SSor = "tom";
         try {
-            SNord = hentRute(rad, kolonne).nord.toString();
+            SNord = hentRute(y, x).nord.toString();
         } catch (Exception e) {
         }
         try {
-            SVest = hentRute(rad, kolonne).vest.toString();
+            SVest = hentRute(y, x).vest.toString();
         } catch (Exception e) {
         }
         try {
-            SOst = hentRute(rad, kolonne).oest.toString();
+            SOst = hentRute(y, x).oest.toString();
         } catch (Exception e) {
         }
         try {
-            SSor = hentRute(rad, kolonne).syd.toString();
+            SSor = hentRute(y, x).syd.toString();
         } catch (Exception e) {
         }
 
         String print = "                             nord:" + SNord + "\n"
-                + "vest: " + SVest + "   " + hentRute(rad, kolonne).toString() + "         øst: " + SOst
+                + "vest: " + SVest + "   " + hentRute(y, x).toString() + "         øst: " + SOst
                 + "\n" + "                             sør:" + SSor;
         return print;
     }
 
-    public Rute hentRute(int rad, int kolonne) {
+    public Rute hentRute(int y, int x) {
         // kan godt hende denne fakker opp
         try {
-            Rute retur = lab.ruter[rad - 1][kolonne - 1];
+            Rute retur = lab.ruter[y - 1][x - 1];
             return retur;
         } catch (Exception e) {
             // System.out.println("kunne ikke hent grunn av: \n" + e);
@@ -94,7 +94,7 @@ public class Rute {
 
     @Override
     public String toString() {
-        String print = "Rute at: (" + kolonne + ", " + rad + ")";
+        String print = "Rute at: (" + x + ", " + y + ")";
         return print;
     }
 

@@ -1,11 +1,12 @@
 import java.util.Scanner;
+
 import java.io.File;
 
 public class Labyrint {
     Rute[][] ruter; // [rad = y] [kolonne = x]
     // den skal ta vare på antall rader og antall kolonner
-    private int rad = 0; // vertikale
-    private int kolonne = 0; // horisontale
+    private int y = 0; // vertikale
+    private int x = 0; // horisontale
 
     public void lesLab(String fil) {
         String lokasjon = "labyrinter/" + fil;
@@ -17,16 +18,18 @@ public class Labyrint {
                 if (antallLinjer == 0) {
                     String[] fordeleRogK = nextLine.split(" ");
                     try {
-                        kolonne = Integer.parseInt(fordeleRogK[0]);
+                        //x = Integer.parseInt(fordeleRogK[0]);
+                        y = Integer.parseInt(fordeleRogK[0]);
                     } catch (Exception e) {
                         System.out.println("Rad fakka opp");
                     }
                     try {
-                        rad = Integer.parseInt(fordeleRogK[1]);
+                        //y = Integer.parseInt(fordeleRogK[1]);
+                        x = Integer.parseInt(fordeleRogK[1]);
                     } catch (Exception e) {
-                        System.out.println("kolonne fakka opp");
+                        System.out.println("x fakka opp");
                     }
-                    ruter = new Rute[rad][kolonne];
+                    ruter = new Rute[y][x];
                     // System.out.println(nextLine);
                 } else {
                     char[] skilleRuter = nextLine.toCharArray();
@@ -36,7 +39,8 @@ public class Labyrint {
                         if (c == '#') {
                             System.out.print("# at (" + tempKolonne + "," + antallLinjer + "), ");
                             try {
-                                settInnRute(tempKolonne, antallLinjer, '#');
+                                //settInnRute(tempKolonne, antallLinjer, '#');
+                                settInnRute(antallLinjer, tempKolonne, '#');
                             } catch (Exception e) {
                                 System.out.println("klarte ikke å lage en svart rute at(" + tempKolonne + ","
                                         + antallLinjer + "), ");
@@ -44,8 +48,8 @@ public class Labyrint {
                         } else if (c == '.') {
                             System.out.print(". at (" + tempKolonne + "," + antallLinjer + "), ");
                             try {
-                                settInnRute(tempKolonne, antallLinjer, '.');
-
+                                //settInnRute(tempKolonne, antallLinjer, '.');
+                                settInnRute(antallLinjer, tempKolonne, '.');
                             } catch (Exception e) {
                                 System.out.println("klarte ikke å lage en hvit rute at(" + tempKolonne + ","
                                         + antallLinjer + "), ");
@@ -56,50 +60,45 @@ public class Labyrint {
                 }
                 antallLinjer++;
             }
-            System.out.println("\nantall rader: " + rad + "\nantall kolonner: " + kolonne);
+            System.out.println("\nantall rader: " + y + "\nantall kolonner: " + x);
             lesLabyrint.close();
         } catch (Exception e) {
             System.out.println(e);
         }
     }
-
     public int hentKolonne() {
-        return kolonne;
+        return x;
     }
-
     public int hentRad() {
-        return rad;
+        return y;
     }
-
-    public Rute hentRute(int kolonne, int rad) { // kolonne = x, rad = y
+    public Rute hentRute(int x, int y) { // kolonne = x, rad = y
         // kan godt hende denne fakker opp
         try {
-            Rute retur = ruter[rad - 1][kolonne - 1];
+            Rute retur = ruter[y - 1][x - 1];
             return retur;
         } catch (Exception e) {
             // System.out.println("kunne ikke hent grunn av: \n" + e);
             return null;
         }
     }
-
     public Rute naboOstRegresjon(Rute rute) { // første rute = [0][0]
         Rute last = rute;
-        if (hentKolonne() == rute.kolonne) {
+        if (hentKolonne() == rute.x) {
             return rute;
         } else {
-            Rute sendeInn = hentRute(last.kolonne + 1, last.rad);
+            Rute sendeInn = hentRute(last.x + 1, last.y);
             // System.out.println(sendeInn);
             last.oest = naboOstRegresjon(sendeInn);
             return last;
         }
     }
-
     public Rute naboSorRegresjon(Rute rute) {
         Rute last = rute;
-        if (hentRad() == rute.rad) {
+        if (hentRad() == rute.y) {
             return rute;
         } else {
-            Rute sendeInn = hentRute(last.kolonne, last.rad + 1);
+            Rute sendeInn = hentRute(last.x, last.y + 1);
             // System.out.println(sendeInn);
             last.syd = naboSorRegresjon(sendeInn);
             return last;
@@ -115,11 +114,11 @@ public class Labyrint {
         }
     }
 
-    public void settInnRute(int rad, int kolonne, char rute) {
+    public void settInnRute(int y, int x, char rute) {
         if (rute == '#') {
-            ruter[rad - 1][kolonne - 1] = new SortRute(rad, kolonne, this);
+            ruter[y - 1][x - 1] = new SortRute(y, x, this);
         } else if (rute == '.') {
-            ruter[rad - 1][kolonne - 1] = new HvitRute(rad, kolonne, this);
+            ruter[y - 1][x - 1] = new HvitRute(y, x, this);
         }
     }
 

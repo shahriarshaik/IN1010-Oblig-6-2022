@@ -6,7 +6,7 @@ public class Aapning extends HvitRute {
 
     @Override
     public String toString() {
-        String print = "Aapning at: (" + kolonne + ", " + rad + ")";
+        String print = "Aapning at: (" + x + ", " + y + ")";
         return print;
     }
 
