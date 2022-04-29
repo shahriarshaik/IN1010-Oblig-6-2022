@@ -1,7 +1,7 @@
 public class test {
     public static void main(String[] args) {
         Labyrint lab = new Labyrint();
-        lab.lesLab("2.in");
+        lab.lesLab("3.in");
         // lab.lesLab("test3x3.txt");
         System.out.println();
         lab.giAlleNabo();
@@ -20,6 +20,8 @@ public class test {
 
         Rute printut = lab.hentRute(8, 2);
         System.out.println(printut.henthvite(printut));
+
+        lab.finnUtveiFra(2, 2);
 
     }
 

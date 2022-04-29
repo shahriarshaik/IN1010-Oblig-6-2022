@@ -11,22 +11,35 @@ public class HvitRute extends Rute {
         return karakter;
     }
 
+
     public void finn(Rute fra) { // TODO
         Rute start = fra;
-        ArrayList<Rute> hvite = henthvite(fra);
+        Rute gjeldende = this;
+        System.out.println("er i : " + gjeldende);
+        ArrayList<Rute> hvite = henthvite(gjeldende);
         if (hvite.size() == 0) { //første testen, denne sjekker om ruten ikke har noen andre hvite ruter rundt seg.
             System.out.println("ingen hvite Ruter rundt, avslutter . . . ");
             System.exit(0);
         }
         for (Rute rute : hvite) {
             if(hvite.size() == 1){ //denne sjekker om den har kommet til en dead end hvis ja så avslutter denne delen
+                System.out.println("dead-end ved: " + rute);
             }
-            else{            
-                if (rute.x == start.x && rute.y == start.y) { // denne sjekker om Nruten den ser på er den forrige ruten 
+            else{          
+                if (rute == start) { // denne sjekker om Nruten den ser på er den forrige ruten, feil her
+                    //System.out.println("peker på " + rute + " burde se bort");
                 } 
-                else {
-                finn(rute); // TODO finish this one, finished ?
+                else{
+                    if (rute instanceof Aapning){
+                        System.out.println("funnet åpning: " + rute);
+                        lab.apninger.add(rute);
+                    }
+                    else { // denne fortsetter regresjonen
+                        //System.out.println("starte ny regresjon . . . ");
+                        rute.finn(this); // TODO finish this one, finished ?
+                    }
                 }
+
             }
 
         }

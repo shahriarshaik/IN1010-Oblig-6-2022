@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 import java.io.File;
 
@@ -7,6 +8,8 @@ public class Labyrint {
     // den skal ta vare på antall rader og antall kolonner
     private int y = 0; // vertikale
     private int x = 0; // horisontale
+    public ArrayList<Rute> apninger = new ArrayList<>();
+
 
     public void lesLab(String fil) {
         String lokasjon = "labyrinter/" + fil;
@@ -163,8 +166,12 @@ public class Labyrint {
         }
     }
 
-    public void finnUtveiFra(int y, int x) {
-        hentRute(x, y).finn(hentRute(x, y));
+    public void finnUtveiFra(int x, int y) {
+        hentRute(x, y).finn(null);
+        System.out.println("Apninger: ");
+        for (Rute rute : apninger) {
+            System.out.println(rute);
+        }
     }
 
     @Override
