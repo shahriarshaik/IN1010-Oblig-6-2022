@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Rute {
     /*
      * Klassen Rute skal ta vare på sine koordinater (radnummer og kolonnenummer)
@@ -23,11 +25,27 @@ public class Rute {
     Rute syd = null;
     Rute vest = null;
     Rute oest = null;
+    public char karakter;
 
-    public String karakter;
-
-    public String hentChar() {
+    public char hentChar() {
         return karakter;
+    }
+
+    public ArrayList<Rute> henthvite(Rute denne) { // TODO test denne
+        ArrayList<Rute> sendeInn = new ArrayList<>();
+        if (denne.nord instanceof HvitRute || denne.nord instanceof Aapning) {
+            sendeInn.add(denne.nord);
+        }
+        if (denne.oest instanceof HvitRute || denne.oest instanceof Aapning) {
+            sendeInn.add(denne.oest);
+        }
+        if (denne.syd instanceof HvitRute || denne.syd instanceof Aapning) {
+            sendeInn.add(denne.syd);
+        }
+        if (denne.vest instanceof HvitRute || denne.vest instanceof Aapning) {
+            sendeInn.add(denne.vest);
+        }
+        return sendeInn;
     }
 
     public String settAutoNaboer() {
@@ -35,7 +53,6 @@ public class Rute {
         String SVest = "tom";
         String SOst = "tom";
         String SSor = "tom";
-
         try {
             SNord = hentRute(y - 1, x).toString();
         } catch (Exception e) {
@@ -96,6 +113,9 @@ public class Rute {
             // System.out.println("kunne ikke hent grunn av: \n" + e);
             return null;
         }
+    }
+
+    public void finn(Rute fra) {
     }
 
     @Override

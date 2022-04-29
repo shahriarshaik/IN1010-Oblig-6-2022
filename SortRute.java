@@ -3,9 +3,14 @@ public class SortRute extends Rute {
         super(y, x, lab);
     }
 
-    public String karakter= "■";
-    public String hentChar() {
+    public char karakter = '■';
+
+    public char hentChar() {
         return karakter;
+    }
+
+    public void finn(Rute fra) {// TODO
+        System.out.println("denne starter");
     }
 
     @Override

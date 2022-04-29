@@ -18,13 +18,13 @@ public class Labyrint {
                 if (antallLinjer == 0) {
                     String[] fordeleRogK = nextLine.split(" ");
                     try {
-                        //x = Integer.parseInt(fordeleRogK[0]);
+                        // x = Integer.parseInt(fordeleRogK[0]);
                         y = Integer.parseInt(fordeleRogK[0]);
                     } catch (Exception e) {
                         System.out.println("Rad fakka opp");
                     }
                     try {
-                        //y = Integer.parseInt(fordeleRogK[1]);
+                        // y = Integer.parseInt(fordeleRogK[1]);
                         x = Integer.parseInt(fordeleRogK[1]);
                     } catch (Exception e) {
                         System.out.println("x fakka opp");
@@ -39,7 +39,7 @@ public class Labyrint {
                         if (c == '#') {
                             System.out.print("# at (" + tempKolonne + "," + antallLinjer + "), ");
                             try {
-                                //settInnRute(tempKolonne, antallLinjer, '#');
+                                // settInnRute(tempKolonne, antallLinjer, '#');
                                 settInnRute(antallLinjer, tempKolonne, '#');
                             } catch (Exception e) {
                                 System.out.println("klarte ikke å lage en svart rute at(" + tempKolonne + ","
@@ -48,7 +48,7 @@ public class Labyrint {
                         } else if (c == '.') {
                             System.out.print(". at (" + tempKolonne + "," + antallLinjer + "), ");
                             try {
-                                //settInnRute(tempKolonne, antallLinjer, '.');
+                                // settInnRute(tempKolonne, antallLinjer, '.');
                                 settInnRute(antallLinjer, tempKolonne, '.');
                             } catch (Exception e) {
                                 System.out.println("klarte ikke å lage en hvit rute at(" + tempKolonne + ","
@@ -67,12 +67,15 @@ public class Labyrint {
         }
         System.out.println(this);
     }
+
     public int hentKolonne() {
         return x;
     }
+
     public int hentRad() {
         return y;
     }
+
     public Rute hentRute(int x, int y) { // kolonne = x, rad = y
         // kan godt hende denne fakker opp
         try {
@@ -83,11 +86,12 @@ public class Labyrint {
             return null;
         }
     }
+
     public Rute naboOstRegresjon(Rute rute) { // første rute = [0][0]
         Rute last = rute;
-        Rute Siste; 
+        Rute Siste;
         if (hentKolonne() == rute.x) {
-            Siste = rute; //ny kode
+            Siste = rute; // ny kode
             naboVestRegresjon(Siste); // ny kode
             return rute;
         } else {
@@ -97,7 +101,8 @@ public class Labyrint {
             return last;
         }
     }
-    public Rute naboVestRegresjon(Rute rute) { 
+
+    public Rute naboVestRegresjon(Rute rute) {
         Rute last = rute;
         if (1 == rute.x) {
             return rute;
@@ -108,6 +113,7 @@ public class Labyrint {
             return last;
         }
     }
+
     public Rute naboSorRegresjon(Rute rute) {
         Rute last = rute;
         Rute Siste;
@@ -122,6 +128,7 @@ public class Labyrint {
             return last;
         }
     }
+
     public Rute naboNordRegresjon(Rute rute) {
         Rute last = rute;
         if (1 == rute.y) {
@@ -133,7 +140,8 @@ public class Labyrint {
             return last;
         }
     }
-    public void giAlleNabo() { 
+
+    public void giAlleNabo() {
         for (int i = 0; i < hentKolonne(); i++) {
             naboSorRegresjon(ruter[0][i]);
         }
@@ -141,17 +149,22 @@ public class Labyrint {
             naboOstRegresjon(ruter[i][0]);
         }
     }
+
     public void settInnRute(int y, int x, char rute) {
         if (rute == '#') {
             ruter[y - 1][x - 1] = new SortRute(y, x, this);
         } else if (rute == '.') {
-            if(y == 1 || x == 1){
+            if (y == 1 || x == 1 || x == this.x || y == this.y) {
                 ruter[y - 1][x - 1] = new Aapning(y, x, this);
-                System.out.println("åpning rute i (" + x + ", " + y + ")");
-            } else{
+                System.out.println(" open at (" + x + ", " + y + ")");
+            } else {
                 ruter[y - 1][x - 1] = new HvitRute(y, x, this);
             }
         }
+    }
+
+    public void finnUtveiFra(int y, int x) {
+        hentRute(x, y).finn(hentRute(x, y));
     }
 
     @Override
