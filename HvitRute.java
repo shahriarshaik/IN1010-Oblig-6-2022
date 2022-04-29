@@ -14,16 +14,21 @@ public class HvitRute extends Rute {
     public void finn(Rute fra) { // TODO
         Rute start = fra;
         ArrayList<Rute> hvite = henthvite(fra);
-        if (hvite.size() == 0) {
-            System.out.println("ingen hvite Ruter rundt");
+        if (hvite.size() == 0) { //første testen, denne sjekker om ruten ikke har noen andre hvite ruter rundt seg.
+            System.out.println("ingen hvite Ruter rundt, avslutter . . . ");
             System.exit(0);
         }
         for (Rute rute : hvite) {
-            if (rute.x == start.x && rute.y == start.y) {
-
-            } else {
-                finn(rute); // TODO finish this one
+            if(hvite.size() == 1){ //denne sjekker om den har kommet til en dead end hvis ja så avslutter denne delen
             }
+            else{            
+                if (rute.x == start.x && rute.y == start.y) { // denne sjekker om Nruten den ser på er den forrige ruten 
+                } 
+                else {
+                finn(rute); // TODO finish this one, finished ?
+                }
+            }
+
         }
     }
 
