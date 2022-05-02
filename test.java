@@ -21,7 +21,7 @@ public class test {
         Rute printut = lab.hentRute(8, 2);
         System.out.println(printut.henthvite(printut));
 
-        lab.finnUtveiFra(2, 2);
+        lab.finnUtveiFra(6, 12);
 
     }
 
