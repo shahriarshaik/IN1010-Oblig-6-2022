@@ -14,7 +14,7 @@ public class HvitRute extends Rute {
     public void finn(Rute fra) { // TODO
         Rute start = fra;
         Rute gjeldende = this;
-        System.out.println("er i : " + gjeldende);
+        // System.out.println("er i : " + gjeldende);
         ArrayList<Rute> hvite = henthvite(gjeldende);
         if (hvite.size() == 0) { // første testen, denne sjekker om ruten ikke har noen andre hvite ruter rundt
                                  // seg.
@@ -25,9 +25,9 @@ public class HvitRute extends Rute {
             if (hvite.size() == 1) { // denne sjekker om den har kommet til en dead end hvis ja så avslutter denne
                 if (fra == null) {
                     rute.finn(this);
-                    System.out.println("dead-end ved: " + rute);
+                    // System.out.println("dead-end ved: " + rute);
                 } else {
-                    System.out.println("dead-end ved: " + rute);
+                    // System.out.println("dead-end ved: " + rute);
                 }
             } else {
                 if (rute == start) { // denne sjekker om Nruten den ser på er den forrige ruten, feil her

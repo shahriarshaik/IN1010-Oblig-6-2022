@@ -10,7 +10,6 @@ public class Labyrint {
     private int x = 0; // horisontale
     public ArrayList<Rute> apninger = new ArrayList<>();
 
-
     public void lesLab(String fil) {
         String lokasjon = "labyrinter/" + fil;
         try {
@@ -36,11 +35,11 @@ public class Labyrint {
                     // System.out.println(nextLine);
                 } else {
                     char[] skilleRuter = nextLine.toCharArray();
-                    System.out.println("\n" + nextLine + ": ");
+                    // System.out.println("\n" + nextLine + ": ");
                     int tempKolonne = 1;
                     for (char c : skilleRuter) {
                         if (c == '#') {
-                            System.out.print("# at (" + tempKolonne + "," + antallLinjer + "), ");
+                            // System.out.print("# at (" + tempKolonne + "," + antallLinjer + "), ");
                             try {
                                 // settInnRute(tempKolonne, antallLinjer, '#');
                                 settInnRute(antallLinjer, tempKolonne, '#');
@@ -49,7 +48,7 @@ public class Labyrint {
                                         + antallLinjer + "), ");
                             }
                         } else if (c == '.') {
-                            System.out.print(". at (" + tempKolonne + "," + antallLinjer + "), ");
+                            // System.out.print(". at (" + tempKolonne + "," + antallLinjer + "), ");
                             try {
                                 // settInnRute(tempKolonne, antallLinjer, '.');
                                 settInnRute(antallLinjer, tempKolonne, '.');
@@ -63,12 +62,13 @@ public class Labyrint {
                 }
                 antallLinjer++;
             }
-            System.out.println("\nantall rader: " + y + "\nantall kolonner: " + x);
+            // System.out.println("\nantall rader: " + y + "\nantall kolonner: " + x);
             lesLabyrint.close();
         } catch (Exception e) {
             System.out.println(e);
         }
-        System.out.println(this);
+        giAlleNabo();
+        // System.out.println(this);
     }
 
     public int hentKolonne() {
@@ -159,7 +159,7 @@ public class Labyrint {
         } else if (rute == '.') {
             if (y == 1 || x == 1 || x == this.x || y == this.y) {
                 ruter[y - 1][x - 1] = new Aapning(y, x, this);
-                System.out.println(" open at (" + x + ", " + y + ")");
+                // System.out.println(" open at (" + x + ", " + y + ")");
             } else {
                 ruter[y - 1][x - 1] = new HvitRute(y, x, this);
             }
