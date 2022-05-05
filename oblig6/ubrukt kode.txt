@@ -1,0 +1,25 @@
+        _____________________________________________________________________________________________________________________________________________________________________
+        disse 3 er loops, ene lopper gjennom alle, andre looper gjennom en måte som gjør det enkelt å bruke naboSorRegresjon(); tredje enkel å bruke naboOstRegresjon();
+        
+        // denne looper gjennom ALLE, men dette er ikke viktig for oss
+        /*
+         * System.out.println();
+         * for (int x = 0; x < lab.hentRad(); x++) {
+         * for (int i = 0; i < lab.hentKolonne(); i++) {
+         * System.out.println(lab.ruter[x][i]);
+         * }
+         * }
+         */
+
+        // denne er en perfekt loop for syd regresjonene
+        System.out.println();
+        for (int i = 0; i < lab.hentKolonne(); i++) {
+            System.out.println(lab.ruter[0][i]);
+        }
+
+        // denne er perfekt loop for øst regresjonen
+        System.out.println();
+        for (int i = 0; i < lab.hentRad(); i++) {
+            System.out.println(lab.ruter[i][0]);
+        }
+        _____________________________________________________________________________________________________________________________________________________________________
